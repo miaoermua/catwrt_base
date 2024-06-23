@@ -1,6 +1,6 @@
 #!/bin/bash
 GREEN='\033[0;32m'
-NC='\033[0m' # 无色
+NC='\033[0m'
 
 TARGET_DIR="/home/cat/lede/package"
 
@@ -22,6 +22,7 @@ REPOS=(
     "https://github.com/sirpdboy/luci-app-eqosplus"
     "https://github.com/sirpdboy/luci-app-autotimeset"
     "https://github.com/sirpdboy/luci-app-lucky"
+    "https://github.com/sirpdboy/luci-app-ddns-go"
     "https://github.com/kuoruan/openwrt-v2ray"
     "https://github.com/Erope/openwrt_nezha"
 )
