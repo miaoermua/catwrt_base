@@ -2,7 +2,14 @@
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-TARGET_DIR="/home/cat/lede/package"
+USER_HOME="/home/$USER"
+TARGET_DIR="$USER_HOME/lede/package"
+
+if [ "$(id -u)" -eq 0 ]; then
+    echo -e "${GREEN}请切换到非 root 用户进行编译。${NC}"
+    exit 1
+fi
+
 
 REPOS=(
     "https://github.com/destan19/OpenAppFilter"
