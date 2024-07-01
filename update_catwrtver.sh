@@ -34,11 +34,11 @@ else
 fi
 
 FILES=(
-    "$TARGET_DIR/base-files/files/bin/config_generate $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/bin/config_generate"
+    "$TARGET_DIR/base-files/files/bin/config_generate $AUTO_CLONECODE_DIR/v24.8/amd64/base-files/bin/config_generate"
     "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $AUTO_CLONECODE_DIR/lean/default-settings/files/zzz-default-settings"
-    "$TARGET_DIR/base-files/files/etc/catwrt_release $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/etc/catwrt_release"
-    "$TARGET_DIR/base-files/files/etc/banner $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/etc/banner"
-    "$TARGET_DIR/base-files/files/etc/banner.failsafe $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/etc/banner.failsafe"
+    "$TARGET_DIR/base-files/files/etc/catwrt_release $AUTO_CLONECODE_DIR/v24.8/amd64/base-files/etc/catwrt_release"
+    "$TARGET_DIR/base-files/files/etc/banner $AUTO_CLONECODE_DIR/v24.8/amd64/base-files/etc/banner"
+    "$TARGET_DIR/base-files/files/etc/banner.failsafe $AUTO_CLONECODE_DIR/v24.8/amd64/base-files/etc/banner.failsafe"
 )
 
 mkdir -p "$CATTOOLS_TARGET_DIR"
