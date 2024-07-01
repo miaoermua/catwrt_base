@@ -7,31 +7,41 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 1
 fi
 
-REPO_URL="https://github.com/miaoermua/auto_clonecode"
-CLONE_DIR="$USER_HOME/auto_clonecode"
+AUTO_CLONECODE_REPO_URL="https://github.com/miaoermua/auto_clonecode"
+AUTO_CLONECODE_DIR="$USER_HOME/auto_clonecode"
 TARGET_DIR="$USER_HOME/lede/package"
 
-if [ -d "$CLONE_DIR" ]; then
-    echo "Updating repository $CLONE_DIR"
-    cd "$CLONE_DIR" && git pull
+CATTOOLS_REPO_URL="https://github.com/miaoermua/cattools"
+CATTOOLS_DIR="$USER_HOME/cattools"
+CATTOOLS_TARGET_DIR="$TARGET_DIR/base-files/files/usr/bin"
+
+# autoclonecode
+if [ -d "$AUTO_CLONECODE_DIR" ]; then
+    echo "Updating repository $AUTO_CLONECODE_DIR"
+    cd "$AUTO_CLONECODE_DIR" && git pull
 else
-    echo "Cloning repository $REPO_URL to $CLONE_DIR"
-    git clone "$REPO_URL" "$CLONE_DIR"
+    echo "Cloning repository $AUTO_CLONECODE_REPO_URL to $AUTO_CLONECODE_DIR"
+    git clone "$AUTO_CLONECODE_REPO_URL" "$AUTO_CLONECODE_DIR"
+fi
+
+# cattools
+if [ -d "$CATTOOLS_DIR" ]; then
+    echo "Updating repository $CATTOOLS_DIR"
+    cd "$CATTOOLS_DIR" && git pull
+else
+    echo "Cloning repository $CATTOOLS_REPO_URL to $CATTOOLS_DIR"
+    git clone "$CATTOOLS_REPO_URL" "$CATTOOLS_DIR"
 fi
 
 FILES=(
-    "$TARGET_DIR/base-files/bin/config_generate $CLONE_DIR/main/v23.8/amd64/base-files/bin/config_generate"
-    "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $CLONE_DIR/main/lean/default-settings/files/zzz-default-settings"
-    "$TARGET_DIR/base-files/etc/catwrt_release $CLONE_DIR/main/v23.8/amd64/base-files/etc/catwrt_release"
-    "$TARGET_DIR/base-files/files/etc/banner $CLONE_DIR/main/v23.8/amd64/base-files/etc/banner"
-    "$TARGET_DIR/base-files/files/etc/banner.failsafe $CLONE_DIR/main/v23.8/amd64/base-files/etc/banner.failsafe"
+    "$TARGET_DIR/base-files/bin/config_generate $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/bin/config_generate"
+    "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $AUTO_CLONECODE_DIR/lean/default-settings/files/zzz-default-settings"
+    "$TARGET_DIR/base-files/etc/catwrt_release $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/etc/catwrt_release"
+    "$TARGET_DIR/base-files/files/etc/banner $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/etc/banner"
+    "$TARGET_DIR/base-files/files/etc/banner.failsafe $AUTO_CLONECODE_DIR/v23.8/amd64/base-files/etc/banner.failsafe"
 )
 
-CATTOOLS_DIR="$TARGET_DIR/base-files/files/usr/bin"
-CATTOOLS_SRC="$CLONE_DIR/main/cattools.sh"
-CATTOOLS_PATH="$CATTOOLS_DIR/cattools"
-
-mkdir -p "$CATTOOLS_DIR"
+mkdir -p "$CATTOOLS_TARGET_DIR"
 
 for file_info in "${FILES[@]}"; do
     file_path=$(echo "$file_info" | awk '{print $1}')
@@ -41,6 +51,9 @@ for file_info in "${FILES[@]}"; do
         cp "$src_path" "$file_path"
     fi
 done
+
+CATTOOLS_SRC="$CATTOOLS_DIR/cattools.sh"
+CATTOOLS_PATH="$CATTOOLS_TARGET_DIR/cattools"
 
 if [ ! -f "$CATTOOLS_PATH" ] || ! cmp -s "$CATTOOLS_PATH" "$CATTOOLS_SRC"; then
     echo "Replacing $CATTOOLS_PATH with $CATTOOLS_SRC"
