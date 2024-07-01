@@ -18,4 +18,4 @@ cd "$LEDE_DIR" || exit
 ./scripts/feeds install -a
 
 echo "请选择你的机型保存开始下一步准备环境!"
-make menuconfig
+echo "输入  make menuconfig  以开始"
