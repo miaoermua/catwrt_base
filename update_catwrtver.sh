@@ -33,7 +33,7 @@ echo "Downloading $CATTOOLS_URL to $CATTOOLS_PATH"
 curl -sL "$CATTOOLS_URL" -o "$CATTOOLS_PATH"
 
 
-chmod +x "$TARGET_DIR/base-files/bin/config_generate"
+chmod +x "$TARGET_DIR/base-files/files/bin/config_generate"
 chmod +x "$TARGET_DIR/lean/default-settings/files/zzz-default-settings"
 chmod +x "$CATTOOLS_PATH"
 
