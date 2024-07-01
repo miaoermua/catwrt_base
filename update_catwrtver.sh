@@ -9,7 +9,7 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 FILES=(
-    "$TARGET_DIR/base-files/bin/config_generate https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/v23.8/amd64/base-files/files/bin/config_generate"
+    "$TARGET_DIR/base-files/files/bin/config_generate https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/v23.8/amd64/base-files/bin/config_generate"
     "$TARGET_DIR/lean/default-settings/files/zzz-default-settings https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/lean/default-settings/files/zzz-default-settings"
     "$TARGET_DIR/base-files/etc/catwrt_release https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/v23.8/amd64/base-files/etc/catwrt_release"
     "$TARGET_DIR/base-files/files/etc/banner https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/v23.8/amd64/base-files/etc/banner"
