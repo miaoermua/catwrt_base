@@ -1,0 +1,65 @@
+#!/bin/bash
+###
+# @Author: timochan
+# @Date: 2023-02-03 19:45:22
+# @LastEditors: timochan
+# @LastEditTime: 2023-08-08 13:35:15
+# @FilePath: /catwrt-update/bash/main/catwrt-update.sh
+###
+
+API_URL="https://api.miaoer.xyz/api/v2/snippets/catwrt/update"
+VERSION_FILE="/etc/catwrt_release"
+
+remote_error() {
+    echo "Remote $1 get failed for arch: $arch_self, please check your network!"
+    exit 1
+}
+local_error() {
+    echo "Local $1 get failed, please check your /etc/catwrt-release!"
+    exit 1
+}
+get_remote_hash() {
+    arch_self=$1
+    version_remote=$(curl -s "$API_URL" | jq -r ".$arch_self.version")
+    hash_remote=$(curl -s "$API_URL" | jq -r ".$arch_self.hash")
+
+    if [ $? -ne 0 ] || [ -z "$version_remote" ] || [ -z "$hash_remote" ]; then
+        remote_error "version or hash"
+    fi
+}
+init() {
+    if [ ! -f "$VERSION_FILE" ]; then
+        local_error "version file"
+    fi
+
+    version_local=$(grep 'version' "$VERSION_FILE" | cut -d '=' -f 2)
+    hash_local=$(grep 'hash' "$VERSION_FILE" | cut -d '=' -f 2)
+    source_local=$(grep 'source' "$VERSION_FILE" | cut -d '=' -f 2)
+    arch_local=$(grep 'arch' "$VERSION_FILE" | cut -d '=' -f 2)
+}
+contrast_version() {
+    if [ "$version_remote" == "$version_local" ] && [ "$hash_remote" == "$hash_local" ]; then
+        echo "================================"
+        echo "Your CatWrt is up to date!"
+        echo "================================"
+    else
+        echo "================================"
+        echo "Your CatWrt is out of date, you should upgrade it!"
+        echo "You can visit 'https://www.miaoer.xyz/posts/network/catwrt' to get more information!"
+        echo "================================"
+    fi
+}
+print_version() {
+    echo "Local  Version : $version_local"
+    echo "Remote Version : $version_remote"
+    echo "Local  Hash    : $hash_local"
+    echo "Remote Hash    : $hash_remote"
+    echo "================================"
+}
+main() {
+    init
+    get_remote_hash "$arch_local"
+    contrast_version
+    print_version
+}
+main

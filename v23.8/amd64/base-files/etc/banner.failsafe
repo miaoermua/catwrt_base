@@ -1,0 +1,27 @@
+
+     _____     _             _
+    |     |___| |_ _ _ _ ___| |_
+    |   --| .'|  _| | | |  _|  _|
+    |_____|__,|_| |_____|_| |_|
+   W I R E L E S S   F R E E D O M
+
+======================================
+         CatWrt.v23.8.x86_64
+           Blog: miaoer.xyz
+ %D: Lean source %C
+
+================= FAILSAFE MODE active ================
+special commands:
+* firstboot	     reset settings to factory defaults
+* mount_root	 mount root-partition with config files
+
+after mount_root:
+* passwd			 change root's password
+* /etc/config		    directory with config files
+
+for more help see:
+https://openwrt.org/docs/guide-user/troubleshooting/
+- failsafe_and_factory_reset
+- root_password_reset
+=======================================================
+
