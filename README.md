@@ -1,3 +1,8 @@
+# catwrt_base
+
+CatWrt_Base 是基于 Lean's LEDE 修改的发行版基础资源仓库，将二次编辑好的内容上传到本仓库再通过自动化脚本安装到对应位置实现预装到系统中。
+
+实现编译自动化，版本管理...等以前无法管理的文件统一归类。
 
 **更新插件库**
 ```bash
@@ -29,6 +34,24 @@ libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libpython3-d
 libssl-dev libtool lrzsz mkisofs msmtp ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 \
 python3-pyelftools python3-setuptools qemu-utils rsync scons squashfs-tools subversion swig texinfo \
 uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+```
+
+## 更新源码
+
+```bash
+cd lede
+git pull
+./scripts/feeds update -a
+./scripts/feeds install -a
+make defconfig
+make download -j8
+```
+
+## 编译
+
+```bash
+make menuconfig
+make V=s -j$(nproc)
 ```
 
 [coolsnowwolf/lede: Lean's LEDE source](https://github.com/coolsnowwolf/lede)
