@@ -1,12 +1,12 @@
 
 **更新插件库**
 ```bash
-curl https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/pull.sh | bash
+curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | bash
 ```
 
 **刷版本号**
 ```bash
-curl https://raw.githubusercontent.com/miaoermua/auto_clonecode/main/update_catwrtver.sh | bash
+curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/update_catwrtver.sh | bash
 ```
 
 ---
