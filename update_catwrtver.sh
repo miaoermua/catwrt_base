@@ -7,8 +7,8 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 1
 fi
 
-AUTO_CLONECODE_REPO_URL="https://github.com/miaoermua/auto_clonecode"
-AUTO_CLONECODE_DIR="$USER_HOME/auto_clonecode"
+AUTO_CLONECODE_REPO_URL="https://github.com/miaoermua/catwrt_base"
+AUTO_CLONECODE_DIR="$USER_HOME/catwrt_base"
 TARGET_DIR="$USER_HOME/lede/package"
 
 CATTOOLS_REPO_URL="https://github.com/miaoermua/cattools"
