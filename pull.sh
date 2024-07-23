@@ -10,7 +10,6 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 1
 fi
 
-
 REPOS=(
     "https://github.com/destan19/OpenAppFilter"
     "https://github.com/fw876/helloworld"
@@ -37,6 +36,11 @@ REPOS=(
 # Openclash
 OPENCLASH_URL="https://github.com/vernesong/OpenClash/archive/refs/heads/master.zip"
 OPENCLASH_DIR="$TARGET_DIR/luci-app-openclash"
+
+# WYC-2020 openwrt-packages
+WYC_REPO_URL="https://github.com/WYC-2020/openwrt-packages"
+WYC_REPO_DIR="$USER_HOME/openwrt-packages"
+WYC_PLUGINS=("alist" "homeproxy" "luci-app-alist" "luci-app-homeproxy")
 
 update_or_clone_repo() {
     repo_url=$1
@@ -69,10 +73,34 @@ update_openclash() {
     rm -rf /tmp/master.zip /tmp/OpenClash-master
 }
 
+update_wyc_plugins() {
+    echo -e "${GREEN}Processing WYC-2020 openwrt-packages${NC}"
+
+    if [ -d "$WYC_REPO_DIR" ]; then
+        echo -e "${GREEN}Updating WYC-2020 openwrt-packages${NC}"
+        cd "$WYC_REPO_DIR" || exit
+        git pull
+    else
+        echo -e "${GREEN}Cloning WYC-2020 openwrt-packages${NC}"
+        git clone "$WYC_REPO_URL" "$WYC_REPO_DIR"
+    fi
+
+    for plugin in "${WYC_PLUGINS[@]}"; do
+        plugin_src="$WYC_REPO_DIR/$plugin"
+        plugin_dst="$TARGET_DIR/$plugin"
+        if [ -d "$plugin_dst" ]; then
+            echo -e "${GREEN}Updating $plugin${NC}"
+            rm -rf "$plugin_dst"
+        fi
+        cp -r "$plugin_src" "$plugin_dst"
+    done
+}
+
 for repo in "${REPOS[@]}"; do
     update_or_clone_repo "$repo"
 done
 
 update_openclash
+update_wyc_plugins
 
 echo -e "${GREEN}All repositories are up to date.${NC}"
