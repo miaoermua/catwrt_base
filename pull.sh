@@ -20,6 +20,7 @@ REPOS=(
     "https://github.com/linkease/istore"
     "https://github.com/jerrykuku/luci-theme-argon"
     "https://github.com/0x676e67/luci-theme-design"
+    "https://github.com/Zxilly/UA2F"
     "https://github.com/rufengsuixing/luci-app-usb3disable"
     "https://github.com/esirplayground/luci-app-LingTiGameAcc"
     "https://github.com/esirplayground/LingTiGameAcc"
