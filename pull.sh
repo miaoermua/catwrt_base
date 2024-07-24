@@ -33,6 +33,8 @@ REPOS=(
     "https://github.com/kuoruan/openwrt-v2ray"
     "https://github.com/Erope/openwrt_nezha"
     "https://github.com/selfcan/luci-app-homebox"
+    "https://github.com/lxl6125/openwrt-qbittorrent-enhanced"
+    "https://github.com/sbwml/luci-app-alist"
 )
 
 # Openclash
@@ -42,7 +44,7 @@ OPENCLASH_DIR="$TARGET_DIR/luci-app-openclash"
 # WYC-2020 openwrt-packages
 WYC_REPO_URL="https://github.com/WYC-2020/openwrt-packages"
 WYC_REPO_DIR="$USER_HOME/openwrt-packages"
-WYC_PLUGINS=("alist" "ddnsto" "luci-app-ddnsto")
+WYC_PLUGINS=("ddnsto" "luci-app-ddnsto")
 
 update_or_clone_repo() {
     repo_url=$1
