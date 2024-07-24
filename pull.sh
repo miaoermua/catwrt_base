@@ -32,7 +32,7 @@ REPOS=(
     "https://github.com/sirpdboy/luci-app-ddns-go"
     "https://github.com/kuoruan/openwrt-v2ray"
     "https://github.com/Erope/openwrt_nezha"
-    "https://github.com/selfcan/luci-app-homebox"
+    "https://github.com/selfcan/luci-app-homebox"  ## LUCI NOT WORK!
     "https://github.com/lxl6125/openwrt-qbittorrent-enhanced"
     "https://github.com/sbwml/luci-app-alist"
 )
