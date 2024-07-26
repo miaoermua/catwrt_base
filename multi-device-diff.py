@@ -55,7 +55,8 @@ def summarize_diffs():
 
     summary_lines = []
     for line in diff_lines:
-        if line.startswith('-# CONFIG_TARGET') or line.startswith('-CONFIG_TARGET') or line.startswith('+CONFIG_TARGET') or line.startswith('+# CONFIG_TARGET'):
+        if (line.startswith('-# CONFIG_TARGET') or line.startswith('-CONFIG_TARGET') or line.startswith('+CONFIG_TARGET') or line.startswith('+# CONFIG_TARGET') or
+            line.startswith('-# CONFIG_DEFAULT') or line.startswith('-CONFIG_DEFAULT') or line.startswith('+CONFIG_DEFAULT') or line.startswith('+# CONFIG_DEFAULT')):
             summary_lines.append(line)
 
     write_file(SUMMARY_FILE, summary_lines)
