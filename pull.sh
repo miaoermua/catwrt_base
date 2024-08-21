@@ -5,10 +5,16 @@ NC='\033[0m'
 USER_HOME="/home"
 TARGET_DIR="/home/lede/package"
 
-#    if [ "$(id -u)" -eq 0 ]; then
-#        echo -e "${GREEN}请切换到非 root 用户进行编译。${NC}"
-#        exit 1
-#    fi
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "${GREEN}需要 root 才能使用，但是编译需要非 root 用户${NC}"
+    exit 1
+fi
+
+if [ ! -d "/home/lede" ]; then
+    echo -e "${GREEN}/home 目录下未找到 lede 源码仓库，请确保源码仓库在 /home 目录下，请善用 mv 命令移动源码仓库${NC}"
+    ls /home
+    exit 1
+fi
 
 REPOS=(
     "https://github.com/destan19/OpenAppFilter"
