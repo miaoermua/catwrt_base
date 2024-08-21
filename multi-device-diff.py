@@ -1,9 +1,9 @@
 import os
 import difflib
 
-# 设置路径
 USER_HOME = os.path.expanduser("~")
-CONFIG_FILE = os.path.join(USER_HOME, "lede", ".config")
+LEDE_DIR = os.path.join("/home", "lede")
+CONFIG_FILE = os.path.join(LEDE_DIR, ".config")
 ORIGINAL_FILE = "d1.config"
 DIFF_FILE = "dX-diff.config"
 SUMMARY_FILE = "multi-device-diff.config"
@@ -41,10 +41,10 @@ def compare_configs():
     if diff_lines:
         append_to_file(DIFF_FILE, "\n\n")
         append_to_file(DIFF_FILE, diff_lines)
-        
+
         count = read_count() + 1
         write_count(count)
-        
+
         print(f"已追加差异到 {DIFF_FILE}。当前总机型次数：{count}")
     else:
         print("没有检测到差异")
@@ -63,6 +63,10 @@ def summarize_diffs():
     print(f"multi-device-diff: 已生成总结文件 {SUMMARY_FILE}")
 
 def main():
+    if not os.path.isdir(LEDE_DIR):
+        print(f"错误：{LEDE_DIR} 目录不存在。请确保 LEDE 源码仓库在 /home 目录下。")
+        return
+
     if not os.path.isfile(ORIGINAL_FILE):
         write_file(ORIGINAL_FILE, read_file(CONFIG_FILE))
         write_count(1)
