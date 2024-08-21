@@ -2,10 +2,10 @@
 
 USER_HOME="/home/$USER"
 
-if [ "$(id -u)" -eq 0 ]; then
-    echo "请切换到非 root 用户进行编译。"
-    exit 1
-fi
+# if [ "$(id -u)" -eq 0 ]; then
+#     echo "请切换到非 root 用户进行编译。"
+#     exit 1
+# fi
 
 AUTO_CLONECODE_REPO_URL="https://github.com/miaoermua/catwrt_base"
 AUTO_CLONECODE_DIR="$USER_HOME/catwrt_base"
