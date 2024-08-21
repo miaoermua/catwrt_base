@@ -64,7 +64,7 @@ def summarize_diffs():
 
 def main():
     if not os.path.isdir(LEDE_DIR):
-        print(f"错误：{LEDE_DIR} 目录不存在。请确保 LEDE 源码仓库在 /home 目录下。")
+        print(f"错误：{LEDE_DIR} 目录不存在。请确保 LEDE 源码仓库在 /home 目录下")
         return
 
     if not os.path.isfile(ORIGINAL_FILE):
