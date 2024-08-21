@@ -8,11 +8,11 @@ USER_HOME="/home/$USER"
 # fi
 
 AUTO_CLONECODE_REPO_URL="https://github.com/miaoermua/catwrt_base"
-AUTO_CLONECODE_DIR="$USER_HOME/catwrt_base"
-TARGET_DIR="$USER_HOME/lede/package"
+AUTO_CLONECODE_DIR="/home/catwrt_base"
+TARGET_DIR="/home/lede/package"
 
 CATTOOLS_REPO_URL="https://github.com/miaoermua/cattools"
-CATTOOLS_DIR="$USER_HOME/cattools"
+CATTOOLS_DIR="/home/cattools"
 CATTOOLS_TARGET_DIR="$TARGET_DIR/base-files/files/usr/bin"
 
 # Update Catwrt Version
