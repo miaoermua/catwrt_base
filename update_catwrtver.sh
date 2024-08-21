@@ -17,6 +17,8 @@ CATTOOLS_TARGET_DIR="$TARGET_DIR/base-files/files/usr/bin"
 
 # Update Catwrt Version
 VERSION="v24.9"
+CATWRT_ARCH="mt7621"
+CATWRT_BASE_ARCH="amd64"
 
 # autoclonecode
 if [ -d "$AUTO_CLONECODE_DIR" ]; then
@@ -37,11 +39,11 @@ else
 fi
 
 FILES=(
-    "$TARGET_DIR/base-files/files/bin/config_generate $AUTO_CLONECODE_DIR/$VERSION/amd64/base-files/bin/config_generate"
+    "$TARGET_DIR/base-files/files/bin/config_generate $AUTO_CLONECODE_DIR/$VERSION/$CATWRT_BASE_ARCH/base-files/bin/config_generate"
     "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $AUTO_CLONECODE_DIR/lean/default-settings/files/zzz-default-settings"
-    "$TARGET_DIR/base-files/files/etc/catwrt_release $AUTO_CLONECODE_DIR/$VERSION/amd64/base-files/etc/catwrt_release"
-    "$TARGET_DIR/base-files/files/etc/banner $AUTO_CLONECODE_DIR/$VERSION/amd64/base-files/etc/banner"
-    "$TARGET_DIR/base-files/files/etc/banner.failsafe $AUTO_CLONECODE_DIR/$VERSION/amd64/base-files/etc/banner.failsafe"
+    "$TARGET_DIR/base-files/files/etc/catwrt_release $AUTO_CLONECODE_DIR/$VERSION/$CATWRT_ARCH/base-files/etc/catwrt_release"
+    "$TARGET_DIR/base-files/files/etc/banner $AUTO_CLONECODE_DIR/$VERSION/$CATWRT_ARCH/base-files/etc/banner"
+    "$TARGET_DIR/base-files/files/etc/banner.failsafe $AUTO_CLONECODE_DIR/$VERSION/$CATWRT_ARCH/base-files/etc/banner.failsafe"
 )
 
 mkdir -p "$CATTOOLS_TARGET_DIR"
