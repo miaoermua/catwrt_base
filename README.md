@@ -8,12 +8,12 @@ CatWrt_Base 是基于 Lean's LEDE 修改的发行版基础资源仓库，将二�
 
 **更新插件库**
 ```bash
-curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | bash
+sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | sudo bash
 ```
 
 **刷版本号**
 ```bash
-curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/update_catwrtver.sh | bash
+sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/update_catwrtver.sh | sudo bash
 ```
 
 ---
