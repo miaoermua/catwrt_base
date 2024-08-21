@@ -2,8 +2,8 @@
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-USER_HOME="/home/$USER"
-TARGET_DIR="$USER_HOME/lede/package"
+USER_HOME="/home"
+TARGET_DIR="/home/lede/package"
 
 #    if [ "$(id -u)" -eq 0 ]; then
 #        echo -e "${GREEN}请切换到非 root 用户进行编译。${NC}"
