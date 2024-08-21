@@ -18,7 +18,6 @@ REPOS=(
     "https://github.com/xiaorouji/openwrt-passwall-packages"
     "https://github.com/rufengsuixing/luci-app-adguardhome"
     "https://github.com/linkease/istore"
-    "https://github.com/jerrykuku/luci-theme-argon"
     "https://github.com/0x676e67/luci-theme-design"
     "https://github.com/Zxilly/UA2F"
     "https://github.com/rufengsuixing/luci-app-usb3disable"
@@ -46,12 +45,16 @@ WYC_REPO_URL="https://github.com/WYC-2020/openwrt-packages"
 WYC_REPO_DIR="$USER_HOME/openwrt-packages"
 WYC_PLUGINS=("ddnsto" "luci-app-ddnsto")
 
+# 下载背景
+BACKGROUND_IMAGE_URL="https://cdn.miaoer.xyz/images/bg/kami/background.png"
+BACKGROUND_IMAGE_PATH="$TARGET_DIR/luci-theme-argon/htdocs/luci-static/argon/background"
+
 update_or_clone_repo() {
     repo_url=$1
     repo_name=$(basename -s .git "$repo_url")
     repo_dir="$TARGET_DIR/$repo_name"
 
-    echo -e "${GREEN}Processing $repo_name${NC}"
+    ## echo -e "${GREEN}Processing $repo_name${NC}"
 
     if [ ! -d "$repo_dir" ]; then
         echo -e "${GREEN}Cloning $repo_name${NC}"
@@ -100,11 +103,38 @@ update_wyc_plugins() {
     done
 }
 
+update_luci_theme_argon() {
+    repo_url="https://github.com/jerrykuku/luci-theme-argon"
+    repo_name=$(basename -s .git "$repo_url")
+    repo_dir="$TARGET_DIR/$repo_name"
+
+    echo -e "${GREEN}Processing $repo_name${NC}"
+
+    if [ ! -d "$repo_dir" ]; then
+        echo -e "${GREEN}Cloning $repo_name (branch 18.06)${NC}"
+        git clone -b 18.06 "$repo_url" "$repo_dir"
+    else
+        echo -e "${GREEN}Updating $repo_name${NC}"
+        cd "$repo_dir" || exit
+        git pull origin 18.06
+        cd - || exit
+    fi
+
+    if [ ! -f "$BACKGROUND_IMAGE_PATH/background.png" ]; then
+        echo -e "${GREEN}Downloading background image${NC}"
+        mkdir -p "$BACKGROUND_IMAGE_PATH"
+        wget -O "$BACKGROUND_IMAGE_PATH/background.png" "$BACKGROUND_IMAGE_URL"
+    else
+        echo -e "${GREEN}Background image already exists, skipping download${NC}"
+    fi
+}
+
 for repo in "${REPOS[@]}"; do
     update_or_clone_repo "$repo"
 done
 
 update_openclash
 update_wyc_plugins
+update_luci_theme_argon
 
 echo -e "${GREEN}All repositories are up to date.${NC}"
