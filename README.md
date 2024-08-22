@@ -63,7 +63,8 @@ make V=s -j$(nproc)
 
 ## 解决问题
 [Alist Golang](https://github.com/sbwml/packages_lang_golang)
+[Easymesh](https://github.com/coolsnowwolf/routing/pull/7)
 
 ## 协议
 
-CatWrt 和源码你可以自由使用任何责任需要自行承担，二次发版需要标注来源不得以影响 CatWrt 正式发版，在二次修改发布前需要了解 CatWrt 开发事项避免后端 API 和二次开发版本冲突。
+CatWrt 和源码你可以自由使用(GPL2.0)任何责任需要自行承担，二次发版需要标注来源不得以影响 CatWrt 正式发版，在二次修改发布前需要了解 CatWrt 开发事项应避免关键服务后端 API 和二次开发版本冲突。
