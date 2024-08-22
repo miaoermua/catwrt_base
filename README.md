@@ -2,16 +2,14 @@
 
 CatWrt_Base 是基于 Lean's LEDE 修改的发行版基础资源仓库，将二次编辑好的内容上传到本仓库再通过自动化脚本安装到对应位置实现预装到系统中。
 
-实现编译半自动化，版本管理...等以前无法管理的文件统一归类。
-
-脚本需要 root 运行，编译只能普通用户
+实现编译半自动化，版本管理... 等以前无法管理的文件统一，脚本需要 root 运行，编译只能普通用户
 
 **更新插件库**
 ```bash
 sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | sudo bash
 ```
 
-**刷版本号**
+**刷版本号** （更新 CatWrt 关键文件）
 ```bash
 sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/update_catwrtver.sh | sudo bash
 ```
@@ -63,7 +61,10 @@ make V=s -j$(nproc)
 
 ## 解决问题
 [Alist Golang](https://github.com/sbwml/packages_lang_golang)
-[Easymesh](https://github.com/coolsnowwolf/routing/pull/7)
+
+[Easymesh - mt7621](https://github.com/coolsnowwolf/routing/pull/7)
+
+[MosDNS - mt7621](https://github.com/coolsnowwolf/lede/issues/12117)
 
 ## 协议
 
