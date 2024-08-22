@@ -40,7 +40,7 @@ REPOS=(
     "https://github.com/selfcan/luci-app-homebox"  ## LUCI NOT WORK!
     "https://github.com/lxl6125/openwrt-qbittorrent-enhanced"
     "https://github.com/sbwml/luci-app-alist"
-    "https://github.com/SunBK201/UA3F"    ## TEST
+    "https://github.com/ilxp/luci-app-ikoolproxy"
 )
 
 # Openclash
