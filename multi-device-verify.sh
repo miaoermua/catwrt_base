@@ -32,19 +32,20 @@ while true; do
     echo "multi-device-verify: 脚本结束"
     exit 0
   elif [ "$user_input" == "1" ]; then
+    current_config_hash=$(get_config_hash)
+    current_dir_hash=$(get_dir_hash)
+    current_kernel_version=$(get_kernel_version)
+
+    if [ "$initial_config_hash" != "$current_config_hash" ] || [ "$initial_dir_hash" != "$current_dir_hash" ] || [ "$initial_kernel_version" != "$current_kernel_version" ]; then
+      echo "multi-device-verify: 目录 hash 值或 kernel 版本发生变化，脚本结束"
+      exit 1
+    fi
+
+    echo "multi-device-verify: 目录 hash 值和 kernel 版本一致，继续校验"
     break
   else
     echo "无效输入，请输入 [1] 或 [2]。"
   fi
 done
 
-current_config_hash=$(get_config_hash)
-current_dir_hash=$(get_dir_hash)
-current_kernel_version=$(get_kernel_version)
-
-if [ "$initial_config_hash" != "$current_config_hash" ] || [ "$initial_dir_hash" != "$current_dir_hash" ] || [ "$initial_kernel_version" != "$current_kernel_version" ]; then
-  echo "multi-device-verify: 目录 hash 值或 kernel 版本发生变化，脚本结束"
-  exit 1
-fi
-
-echo "multi-device-verify: 目录 hash 值和 kernel 版本一致，脚本成功结束"
+echo "multi-device-verify: 校验完成，脚本成功结束"
