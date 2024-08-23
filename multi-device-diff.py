@@ -1,7 +1,6 @@
 import os
 import difflib
 
-USER_HOME = os.path.expanduser("~")
 LEDE_DIR = os.path.join("/home", "lede")
 CONFIG_FILE = os.path.join(LEDE_DIR, ".config")
 ORIGINAL_FILE = "d1.config"
