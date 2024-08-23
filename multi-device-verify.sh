@@ -13,7 +13,7 @@ get_config_hash() {
 }
 
 get_kernel_version() {
-  grep "Depends: kernel" "$PACKAGES_FILE" | awk -F '[()]' '{print $2}'
+  grep "Depends: kernel" "$PACKAGES_FILE" | awk -F '[()]' '{if (!seen[$2]++) print $2}'
 }
 
 initial_dir_hash=$(get_dir_hash)
