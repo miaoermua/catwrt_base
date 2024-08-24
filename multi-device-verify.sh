@@ -20,7 +20,6 @@ initial_dir_hash=$(get_dir_hash)
 initial_kernel_version=$(get_kernel_version)
 
 echo
-echo
 echo "初始目录 hash 值: $initial_dir_hash"
 echo "初始 kernel 版本: $initial_kernel_version"
 initial_config_hash=$(get_config_hash)
@@ -44,10 +43,10 @@ while true; do
     fi
 
     if [ "$initial_config_hash" != "$current_config_hash" ]; then
-      echo "multi-device-verify: .config 文件 hash 值发生变化"
+      echo "multi-device-verify: .config 文件 hash 值发生变化，继续检查"
       initial_config_hash=$current_config_hash
     else
-      echo "multi-device-verify: .config 文件 hash 值未变化，是不是昏了"
+      echo "multi-device-verify: .config 文件 hash 值未变化"
     fi
 
     echo "multi-device-verify: 校验完成，脚本成功结束"
