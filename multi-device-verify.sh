@@ -24,11 +24,12 @@ echo "初始目录 hash 值: $initial_dir_hash"
 echo "初始 kernel 版本: $initial_kernel_version"
 initial_config_hash=$(get_config_hash)
 echo "初始 .config 文件 hash 值: $initial_config_hash"
+echo
 
 while true; do
   read -p "multi-device-verify: 按 [1] 继续检查，按 [2] 退出: " user_input
   if [ "$user_input" == "2" ]; then
-    echo "multi-device-verify: 脚本结束"
+    echo "multi-device-verify: 脚本结束!"
     exit 0
   elif [ "$user_input" == "1" ]; then
     current_config_hash=$(get_config_hash)
@@ -39,17 +40,17 @@ while true; do
       echo "multi-device-verify: 目录 hash 值或 kernel 版本发生变化，脚本结束"
       exit 1
     else
-      echo "multi-device-verify: 目录 hash 值和 kernel 版本一致，继续"
+      echo "multi-device-verify: 目录 hash 值和 kernel 版本一致，继续前进吧!"
     fi
 
     if [ "$initial_config_hash" != "$current_config_hash" ]; then
-      echo "multi-device-verify: .config 文件 hash 值发生变化，继续检查"
+      echo "multi-device-verify: .config 已修改，继续检查"
+      echo
       initial_config_hash=$current_config_hash
     else
-      echo "multi-device-verify: .config 文件 hash 值未变化"
+      echo "multi-device-verify: .config 文件未变化"
     fi
-
-    echo "multi-device-verify: 校验完成，继续下一次检查"
+    echo
   else
     echo "无效输入，请输入 [1] 或 [2]。"
   fi
