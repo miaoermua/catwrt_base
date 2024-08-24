@@ -49,8 +49,7 @@ while true; do
       echo "multi-device-verify: .config 文件 hash 值未变化"
     fi
 
-    echo "multi-device-verify: 校验完成，脚本成功结束"
-    break
+    echo "multi-device-verify: 校验完成，继续下一次检查"
   else
     echo "无效输入，请输入 [1] 或 [2]。"
   fi
