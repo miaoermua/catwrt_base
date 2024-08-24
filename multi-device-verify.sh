@@ -17,13 +17,13 @@ get_kernel_version() {
 }
 
 initial_dir_hash=$(get_dir_hash)
-initial_config_hash=$(get_config_hash)
 initial_kernel_version=$(get_kernel_version)
 
 echo
 echo
 echo "初始目录 hash 值: $initial_dir_hash"
 echo "初始 kernel 版本: $initial_kernel_version"
+initial_config_hash=$(get_config_hash)
 echo "初始 .config 文件 hash 值: $initial_config_hash"
 
 while true; do
@@ -36,16 +36,23 @@ while true; do
     current_dir_hash=$(get_dir_hash)
     current_kernel_version=$(get_kernel_version)
 
-    if [ "$initial_config_hash" != "$current_config_hash" ] || [ "$initial_dir_hash" != "$current_dir_hash" ] || [ "$initial_kernel_version" != "$current_kernel_version" ]; then
+    if [ "$initial_dir_hash" != "$current_dir_hash" ] || [ "$initial_kernel_version" != "$current_kernel_version" ]; then
       echo "multi-device-verify: 目录 hash 值或 kernel 版本发生变化，脚本结束"
       exit 1
+    else
+      echo "multi-device-verify: 目录 hash 值和 kernel 版本一致，继续"
     fi
 
-    echo "multi-device-verify: 目录 hash 值和 kernel 版本一致，继续校验"
+    if [ "$initial_config_hash" != "$current_config_hash" ]; then
+      echo "multi-device-verify: .config 文件 hash 值发生变化"
+      initial_config_hash=$current_config_hash
+    else
+      echo "multi-device-verify: .config 文件 hash 值未变化，是不是昏了"
+    fi
+
+    echo "multi-device-verify: 校验完成，脚本成功结束"
     break
   else
     echo "无效输入，请输入 [1] 或 [2]。"
   fi
 done
-
-echo "multi-device-verify: 校验完成，脚本成功结束"
