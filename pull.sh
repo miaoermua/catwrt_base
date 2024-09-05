@@ -41,6 +41,8 @@ REPOS=(
     "https://github.com/lxl6125/openwrt-qbittorrent-enhanced"
     "https://github.com/sbwml/luci-app-alist"
     "https://github.com/ilxp/luci-app-ikoolproxy"
+    "https://github.com/jimlee2002/openwrt-minieap-gdufs"
+    "https://github.com/jimlee2048/luci-proto-minieap"
 )
 
 # Openclash
