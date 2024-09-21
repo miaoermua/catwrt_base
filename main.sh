@@ -85,11 +85,19 @@ update_catwrt_template() {
 
     if [ "$CATWRT_ARCH" == "diy" ]; then
         read -p "请输入自定义文件夹路径 (例如 /diy/theme-whu): " DIY_DIR
+        DIY_DIR=$(echo "$DIY_DIR" | sed 's:/*$::')
         BASE_DIR="$DIY_DIR/base-files"
         LEAN_DIR="$DIY_DIR/lean/default-settings/files"
 
-        if [ ! -d "$BASE_DIR" ] || [ ! -d "$LEAN_DIR" ]; then
-            echo "错误：$BASE_DIR 或 $LEAN_DIR 文件夹不存在，请确保该路径正确。"
+        echo "检查路径: $BASE_DIR 和 $LEAN_DIR"
+
+        if [ ! -d "$BASE_DIR" ]; then
+            echo "错误：目录 $BASE_DIR 不存在。"
+            exit 1
+        fi
+
+        if [ ! -d "$LEAN_DIR" ]; then
+            echo "错误：目录 $LEAN_DIR 不存在。"
             exit 1
         fi
     else
