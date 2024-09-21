@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# 颜色设置
 GREEN='\033[0;32m'
 NC='\033[0m'
 
@@ -83,16 +84,15 @@ update_catwrt_template() {
     read -p "请输入架构类型 (例如 mt798x, mt7621, amd64 或 diy): " CATWRT_ARCH
 
     if [ "$CATWRT_ARCH" == "diy" ]; then
-
         read -p "请输入自定义文件夹路径 (例如 /diy/theme-whu): " DIY_DIR
         BASE_DIR="$DIY_DIR/base-files"
+        LEAN_DIR="$DIY_DIR/lean/default-settings/files"
 
-        if [ ! -d "$BASE_DIR" ]; then
-            echo "错误：$BASE_DIR 文件夹不存在，请确保该路径正确。"
+        if [ ! -d "$BASE_DIR" ] || [ ! -d "$LEAN_DIR" ]; then
+            echo "错误：$BASE_DIR 或 $LEAN_DIR 文件夹不存在，请确保该路径正确。"
             exit 1
         fi
     else
-
         ARCH_DIR="$CATWRT_BASE_DIR/$CATWRT_ARCH"
 
         if [ ! -d "$ARCH_DIR" ]; then
@@ -102,16 +102,17 @@ update_catwrt_template() {
 
         VERSION=$(select_version "$ARCH_DIR")
         BASE_DIR="$ARCH_DIR/$VERSION/base-files"
+        LEAN_DIR="$ARCH_DIR/$VERSION/lean/default-settings/files"
     fi
 
     echo "更新 CatWrt 模板文件..."
 
     FILES=(
         "$TARGET_DIR/base-files/files/bin/config_generate $BASE_DIR/bin/config_generate"
-        "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $BASE_DIR/etc/default-settings"
         "$TARGET_DIR/base-files/files/etc/catwrt_release $BASE_DIR/etc/catwrt_release"
         "$TARGET_DIR/base-files/files/etc/banner $BASE_DIR/etc/banner"
         "$TARGET_DIR/base-files/files/etc/banner.failsafe $BASE_DIR/etc/banner.failsafe"
+        "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $LEAN_DIR/zzz-default-settings"
     )
 
     if [ "$CATWRT_ARCH" == "mt7621" ]; then
