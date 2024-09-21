@@ -87,34 +87,41 @@ update_catwrt_template() {
         read -p "请输入自定义文件夹路径 (例如 /diy/theme-whu): " DIY_DIR
         DIY_DIR=$(echo "$DIY_DIR" | sed 's:/*$::')
         BASE_DIR="$DIY_DIR/base-files"
-        LEAN_DIR="$DIY_DIR/lean/default-settings/files"
+        LEAN_DIR="$DIY_DIR/lean/default-settings/files/zzz-default-settings"
 
         echo "检查路径: $BASE_DIR 和 $LEAN_DIR"
 
-        if [ ! -d "$BASE_DIR" ]; then
+        if [ -d "$BASE_DIR" ]; then
+            echo "base-files 目录存在，内容如下："
+            ls -l "$BASE_DIR"
+        else
             echo "错误：目录 $BASE_DIR 不存在。"
             exit 1
         fi
 
-        if [ ! -d "$LEAN_DIR" ]; then
-            echo "错误：目录 $LEAN_DIR 不存在。"
+        if [ -f "$LEAN_DIR" ]; then
+            echo "lean/default-settings 文件 zzz-default-settings 存在，路径为：$LEAN_DIR"
+        else
+            echo "错误：文件 $LEAN_DIR 不存在。"
             exit 1
         fi
     else
+        # 标准架构路径
         ARCH_DIR="$CATWRT_BASE_DIR/$CATWRT_ARCH"
 
+        # 检查架构目录是否存在
         if [ ! -d "$ARCH_DIR" ]; then
             echo "错误：$ARCH_DIR 文件夹不存在，请确保 CatWrt 源码中有此架构目录。"
             exit 1
         fi
 
+        # 选择版本
         VERSION=$(select_version "$ARCH_DIR")
         BASE_DIR="$ARCH_DIR/$VERSION/base-files"
-        LEAN_DIR="$ARCH_DIR/$VERSION/lean/default-settings/files"
+        LEAN_DIR="$ARCH_DIR/$VERSION/lean/default-settings/files/zzz-default-settings"
     fi
 
     echo "更新 CatWrt 模板文件..."
-
     FILES=(
         "$TARGET_DIR/base-files/files/bin/config_generate $BASE_DIR/bin/config_generate"
         "$TARGET_DIR/base-files/files/etc/catwrt_release $BASE_DIR/etc/catwrt_release"
