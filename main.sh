@@ -1,170 +1,83 @@
 #!/bin/bash
 
-# 颜色设置
-GREEN='\033[0;32m'
-NC='\033[0m'
-
-USER_HOME="/home/$USER"
-LEDE_DIR="/home/lede"
-CATWRT_BASE_DIR="/home/catwrt_base"
-TARGET_DIR="/home/lede/package"
-CATTOOLS_TARGET_DIR="$TARGET_DIR/base-files/files/usr/bin"
-MTKWIFI_FILE="$TARGET_DIR/base-files/files/etc/init.d/mtkwifi"
-
-if [ "$(id -u)" -ne 0 ]; then
-    echo -e "${GREEN}需要 root 才能使用，但是编译需要非 root 用户${NC}"
-    exit 1
-fi
-
-if [ ! -d "$LEDE_DIR" ]; then
-    echo -e "${GREEN}/home 目录下未找到 lede 源码仓库，请确保源码仓库在 /home 目录下${NC}"
-    exit 1
-fi
-
-show_menu() {
-    echo "请选择一个选项："
-    echo "1. 删除已释放的文件"
-    echo "2. 更新 LEDE 源码"
-    echo "3. 更新 CatWrt 模板"
-    echo "0. 退出"
-    read -p "请输入选项: " choice
+display_menu() {
+    echo "1. 更新 CatWrt 模板"
+    echo "2. 删除已释放的模板"
+    echo "3. 退出"
 }
 
-delete_released_files() {
-    echo "删除已释放的文件以确保 lede 源码可以更新"
-    FILES_TO_REMOVE=(
-        "$TARGET_DIR/base-files/files/bin/config_generate"
-        "$TARGET_DIR/lean/default-settings/files/zzz-default-settings"
-        "$TARGET_DIR/base-files/files/etc/catwrt_release"
-        "$TARGET_DIR/base-files/files/etc/banner"
-        "$TARGET_DIR/base-files/files/etc/banner.failsafe"
-        "$MTKWIFI_FILE"
+update_template() {
+    read -p "输入架构和版本 (例如 mt7621/v24.9 或 diy/theme-whu): " arch_version
+    arch=$(echo $arch_version | cut -d'/' -f1)
+    version=$(echo $arch_version | cut -d'/' -f2)
+
+    # Update files based on the architecture and version
+    if [[ -d "/home/catwrt_base/$arch/$version" ]]; then
+        cp /home/catwrt_base/$arch/$version/base-files/files/bin/config_generate /home/lede/package/base-files/files/bin/
+        cp /home/catwrt_base/$arch/$version/base-files/files/etc/catwrt_release /home/lede/package/base-files/files/etc/
+        cp /home/catwrt_base/$arch/$version/base-files/files/etc/banner /home/lede/package/base-files/files/etc/
+        cp /home/catwrt_base/$arch/$version/base-files/files/etc/banner.failsafe /home/lede/package/base-files/files/etc/
+        cp /home/catwrt_base/$arch/$version/lean/default-settings/files/zzz-default-settings /home/lede/package/lean/default-settings/files/
+
+        # Handle mtwifi for mt7621
+        if [[ $arch == "mt7621" ]]; then
+            cp /home/catwrt_base/$arch/$version/base-files/files/etc/init.d/mtwifi /home/lede/package/base-files/files/etc/init.d/
+            chmod +x /home/lede/package/base-files/files/etc/init.d/mtwifi
+        fi
+
+        # Remove mtwifi if switching from mt7621 to other architectures
+        if [[ $arch != "mt7621" && -f /home/lede/package/base-files/files/etc/init.d/mtwifi ]]; then
+            rm -f /home/lede/package/base-files/files/etc/init.d/mtwifi
+            echo "已删除 mtwifi 脚本"
+        fi
+
+        # Add cattools to every architecture
+        curl -fsSL https://raw.githubusercontent.com/miaoermua/cattools/refs/heads/main/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
+        chmod +x /home/lede/package/base-files/files/usr/bin/cattools
+
+        echo "模板更新完成"
+    else
+        echo "无效的架构或版本"
+    fi
+}
+
+delete_template() {
+    read -p "输入架构和版本 (例如 mt7621/v24.9 或 diy/theme-whu): " arch_version
+
+    # Define paths to delete
+    files_to_delete=(
+        "/home/lede/package/base-files/files/bin/config_generate"
+        "/home/lede/package/base-files/files/etc/catwrt_release"
+        "/home/lede/package/base-files/files/etc/banner"
+        "/home/lede/package/base-files/files/etc/banner.failsafe"
+        "/home/lede/package/lean/default-settings/files/zzz-default-settings"
+        "/home/lede/package/base-files/files/usr/bin/cattools"
     )
 
-    for file in "${FILES_TO_REMOVE[@]}"; do
-        if [ -f "$file" ]; then
-            echo "删除文件: $file"
+    # Loop through files and delete if they exist
+    for file in "${files_to_delete[@]}"; do
+        if [[ -f "$file" ]]; then
             rm -f "$file"
-        fi
-    done
-    echo "已删除修改过的文件，您可以继续执行 git pull。"
-}
-
-update_lede() {
-    if [ -d "$LEDE_DIR" ]; then
-        echo "更新 LEDE 源码..."
-        cd "$LEDE_DIR" && git pull
-    else
-        echo "未找到 lede 代码，克隆 lede 仓库到 $LEDE_DIR"
-        git clone https://github.com/coolsnowwolf/lede "$LEDE_DIR"
-    fi
-}
-
-select_version() {
-    local arch_dir="$1"
-    local versions=($(ls "$arch_dir"))
-
-    if [ ${#versions[@]} -eq 1 ]; then
-        echo "${GREEN}检测到唯一版本：${versions[0]}${NC}"
-        echo "${versions[0]}"
-    else
-        echo "请选择版本："
-        select version in "${versions[@]}"; do
-            if [ -n "$version" ]; then
-                echo "$version"
-                return
-            else
-                echo "无效选择，请重试。"
-            fi
-        done
-    fi
-}
-
-update_catwrt_template() {
-    read -p "请输入架构类型 (例如 mt798x, mt7621, amd64 或 diy): " CATWRT_ARCH
-
-    if [ "$CATWRT_ARCH" == "diy" ]; then
-        read -p "请输入自定义文件夹路径 (例如 /diy/theme-whu): " DIY_DIR
-        DIY_DIR=$(echo "$DIY_DIR" | sed 's:/*$::')
-        BASE_DIR="$DIY_DIR/base-files"
-        LEAN_DIR="$DIY_DIR/lean/default-settings/files/zzz-default-settings"
-
-        echo "检查路径: $BASE_DIR 和 $LEAN_DIR"
-
-        if [ -d "$BASE_DIR" ]; then
-            echo "base-files 目录存在，内容如下："
-            ls -l "$BASE_DIR"
-        else
-            echo "错误：目录 $BASE_DIR 不存在。"
-            exit 1
-        fi
-
-        if [ -f "$LEAN_DIR" ]; then
-            echo "lean/default-settings 文件 zzz-default-settings 存在，路径为：$LEAN_DIR"
-        else
-            echo "错误：文件 $LEAN_DIR 不存在。"
-            exit 1
-        fi
-    else
-        # 标准架构路径
-        ARCH_DIR="$CATWRT_BASE_DIR/$CATWRT_ARCH"
-
-        # 检查架构目录是否存在
-        if [ ! -d "$ARCH_DIR" ]; then
-            echo "错误：$ARCH_DIR 文件夹不存在，请确保 CatWrt 源码中有此架构目录。"
-            exit 1
-        fi
-
-        # 选择版本
-        VERSION=$(select_version "$ARCH_DIR")
-        BASE_DIR="$ARCH_DIR/$VERSION/base-files"
-        LEAN_DIR="$ARCH_DIR/$VERSION/lean/default-settings/files/zzz-default-settings"
-    fi
-
-    echo "更新 CatWrt 模板文件..."
-    FILES=(
-        "$TARGET_DIR/base-files/files/bin/config_generate $BASE_DIR/bin/config_generate"
-        "$TARGET_DIR/base-files/files/etc/catwrt_release $BASE_DIR/etc/catwrt_release"
-        "$TARGET_DIR/base-files/files/etc/banner $BASE_DIR/etc/banner"
-        "$TARGET_DIR/base-files/files/etc/banner.failsafe $BASE_DIR/etc/banner.failsafe"
-        "$TARGET_DIR/lean/default-settings/files/zzz-default-settings $LEAN_DIR/zzz-default-settings"
-    )
-
-    if [ "$CATWRT_ARCH" == "mt7621" ]; then
-        FILES+=("$MTKWIFI_FILE $BASE_DIR/etc/init.d/mtkwifi")
-    else
-        if [ -f "$MTKWIFI_FILE" ]; then
-            echo "检测到非 mt7621 架构，删除 $MTKWIFI_FILE"
-            rm -f "$MTKWIFI_FILE"
-        fi
-    fi
-
-    for file_info in "${FILES[@]}"; do
-        file_path=$(echo "$file_info" | awk '{print $1}')
-        src_path=$(echo "$file_info" | awk '{print $2}')
-        if [ -f "$src_path" ]; then
-            echo "替换 $file_path 为 $src_path"
-            cp "$src_path" "$file_path"
-        else
-            echo "未找到文件 $src_path，跳过替换。"
+            echo "已删除: $file"
         fi
     done
 
-    chmod +x "$TARGET_DIR/base-files/files/bin/config_generate"
-    chmod +x "$TARGET_DIR/lean/default-settings/files/zzz-default-settings"
-    if [ "$CATWRT_ARCH" == "mt7621" ]; then
-        chmod +x "$MTKWIFI_FILE"
+    # Special handling for mtwifi
+    if [[ -f /home/lede/package/base-files/files/etc/init.d/mtwifi ]]; then
+        rm -f /home/lede/package/base-files/files/etc/init.d/mtwifi
+        echo "已删除 mtwifi 脚本"
     fi
-    echo "CatWrt 模板文件已更新。"
+
+    echo "模板删除完成"
 }
 
 while true; do
-    show_menu
-    case $choice in
-        1) delete_released_files ;;
-        2) update_lede ;;
-        3) update_catwrt_template ;;
-        0) echo "退出脚本"; exit 0 ;;
-        *) echo "无效选项，请重新输入。" ;;
+    display_menu
+    read -p "选择操作: " option
+    case $option in
+        1) update_template ;;
+        2) delete_template ;;
+        3) exit 0 ;;
+        *) echo "无效选项" ;;
     esac
 done
