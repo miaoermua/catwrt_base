@@ -31,8 +31,10 @@ update_template() {
             echo "已删除 mtwifi 脚本"
         fi
 
+        chmod +x /home/lede/package/lean/default-settings/files/zzz-default-settings
+
         # Add cattools to every architecture
-        curl -fsSL https://raw.githubusercontent.com/miaoermua/cattools/refs/heads/main/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
+        curl -fsSL https://service.miaoer.xyz/cattools/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
         chmod +x /home/lede/package/base-files/files/usr/bin/cattools
 
         echo "模板更新完成"
