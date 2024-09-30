@@ -32,6 +32,7 @@ update_template() {
         fi
 
         chmod +x /home/lede/package/lean/default-settings/files/zzz-default-settings
+        chmod +x /home/lede/package/base-files/files/bin/config_generate
 
         # Add cattools to every architecture
         curl -fsSL https://service.miaoer.xyz/cattools/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
