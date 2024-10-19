@@ -43,6 +43,7 @@ REPOS=(
     "https://github.com/ilxp/luci-app-ikoolproxy"
     "https://github.com/jimlee2002/openwrt-minieap-gdufs"
     "https://github.com/jimlee2048/luci-proto-minieap"
+    "https://github.com/ysc3839/openwrt-minieap"
 )
 
 # Openclash
