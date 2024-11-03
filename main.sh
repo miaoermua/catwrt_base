@@ -30,11 +30,12 @@ update_template() {
             rm -f /home/lede/package/base-files/files/etc/init.d/mtwifi
             echo "已删除 mtwifi 脚本"
         fi
-
+        
         chmod +x /home/lede/package/lean/default-settings/files/zzz-default-settings
         chmod +x /home/lede/package/base-files/files/bin/config_generate
 
         # Add cattools to every architecture
+        mkdir -p /home/lede/package/base-files/files/usr/bin
         curl -fsSL https://service.miaoer.xyz/cattools/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
         chmod +x /home/lede/package/base-files/files/usr/bin/cattools
 
