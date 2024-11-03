@@ -1,0 +1,5 @@
+version=v24.11
+hash=21b109e824d63728abf6a399b3dfdb9e0b323f04
+source=lean
+arch=rkarm64
+customization=yes
