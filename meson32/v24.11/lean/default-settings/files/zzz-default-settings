@@ -1,3 +1,10 @@
+###
+ # @Author: miaoermua
+ # @Date: 2024-09-21 19:33:41
+ # @LastEditors: miaoermua
+ # @LastEditTime: 2024-12-07 13:14:05
+ # @FilePath: \auto_clonecode\meson32\lean\default-settings\files\zzz-default-settings
+### 
 #!/bin/sh
 
 uci set luci.main.lang=zh_cn
