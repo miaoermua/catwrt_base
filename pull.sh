@@ -58,8 +58,8 @@ WYC_REPO_URL="https://github.com/WYC-2020/openwrt-packages"
 WYC_REPO_DIR="$USER_HOME/openwrt-packages"
 WYC_PLUGINS=("ddnsto" "luci-app-ddnsto")
 
-# 下载背景
-BACKGROUND_IMAGE_URL="https://cdn.miaoer.xyz/images/bg/kami/background.png"
+# download kami background
+BACKGROUND_IMAGE_URL="https://cdn.miaoer.net/images/bg/kami/background.png"
 BACKGROUND_IMAGE_PATH="$TARGET_DIR/luci-theme-argon/htdocs/luci-static/argon/background"
 
 update_or_clone_repo() {
