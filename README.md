@@ -16,6 +16,9 @@ sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh |
 sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/mian.sh | sudo bash
 ```
 
+版本描述：
+CatWrt 的 Arch & Version 对应目录中的 `chip & architecture / version` 如 `amd64/v24.9`
+
 ---
 
 ## 准备环境
