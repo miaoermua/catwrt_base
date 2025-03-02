@@ -98,6 +98,13 @@ miaoer@BuildCatWrt:/home/lede$ git pull
 Already up to date.
 ```
 
+遇到 naive 编译错误，安装一下额外依赖
+
+```bash
+sudo apt install clang generate-ninja
+rm -rf build_dir/hostpkg/gn-*/
+```
+
 ## 协议
 
 CatWrt 和源码你可以自由使用 (GPL2.0) 任何责任需要自行承担，二次发版需要标注来源不得以影响 CatWrt 正式发版，在二次修改发布前需要了解 CatWrt 开发事项应避免关键服务后端 API 和二次开发版本冲突。
