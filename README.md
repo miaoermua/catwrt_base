@@ -6,6 +6,8 @@ CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改
 
 实现编译半自动化，版本管理，文件统一；脚本需要 root 运行，编译只能普通用户；资源文件和 LEDE 源码需要存储在 `/home` 才能正常食用。
 
+![[COPYING](https://github.com/miaoermua/catwrt_base/blob/main/COPYING)]((https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceGPLv2/licencegplv23.svg))
+
 **更新插件库**
 ```bash
 sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | sudo bash
