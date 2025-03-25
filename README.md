@@ -8,6 +8,7 @@ CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改
 
 [![Stars](https://m3-markdown-badges.vercel.app/stars/3/3/miaoermua/catwrt_base)](https://github.com/miaoermua/catwrt_base)
 [![Issues](https://m3-markdown-badges.vercel.app/issues/1/2/miaoermua/catwrt_base)](https://github.com/miaoermua/catwrt_base/issues)
+[![Support](https://ziadoua.github.io/m3-Markdown-Badges/badges/Sponsor/sponsor1.svg)](https://www.miaoer.net/sponsor)
 [![COPYING](https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceGPLv2/licencegplv23.svg)](https://github.com/miaoermua/catwrt_base/blob/main/COPYING)
 
 **更新插件库**
