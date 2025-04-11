@@ -97,8 +97,16 @@ hint: preference for all repositories. You can also pass --rebase, --no-rebase,
 hint: or --ff-only on the command line to override the configured default per
 hint: invocation.
 miaoer@BuildCatWrt:/home/lede$ git fetch origin 
+remote: Enumerating objects: 680, done.
+remote: Counting objects: 100% (365/365), done.
+remote: Compressing objects: 100% (70/70), done.
+remote: Total 680 (delta 315), reused 298 (delta 294), pack-reused 315 (from 2)
+Receiving objects: 100% (680/680), 322.63 KiB | 3.19 MiB/s, done.
+Resolving deltas: 100% (341/341), completed with 119 local objects.
+From https://github.com/coolsnowwolf/lede
+   0146ee196..433382b8f  master     -> origin/master
 miaoer@BuildCatWrt:/home/lede$ git reset --hard origin
-HEAD is now at 0146ee196 mediatek: add support for netcore n60 pro
+HEAD is now at 433382b8f package: add kmod-r8127 ethernet driver
 miaoer@BuildCatWrt:/home/lede$ git pull
 Already up to date.
 ```
