@@ -1,5 +1,7 @@
 # catwrt_base
 
+> 请不要继续 fork，近日开发工作讲优化结构。
+
 CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改的发行版基础资源仓库，将二次编辑好的内容上传到本仓库再通过自动化脚本安装到对应位置实现预装到系统中。
 
 相比 [miaoermua/CatWrt](https://github.com/miaoermua/CatWrt) 的二进制软件源仓库，这里就差不多是源代码了，不过都是一些修改向的脚本，本仓库不会存储二进制&闭源代码，也不会集成闭源代码到 CatWrt 中!
