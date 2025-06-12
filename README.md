@@ -52,6 +52,12 @@ swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
 
 更新 LEDE 源码和执行 feeds 脚本更新源码仓库的插件
 
+> 请不要给 LEDE 使用任何 sudo 或 root 用户污染源码权限。
+>
+> ```bash
+> sudo chown -R miaoer:miaoer /home/miaoer/lede
+> ```
+
 ```bash
 cd ~/lede
 git pull
