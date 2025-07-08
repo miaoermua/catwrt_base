@@ -6,7 +6,9 @@ CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改
 
 相比 [miaoermua/CatWrt](https://github.com/miaoermua/CatWrt) 的二进制软件源仓库，这里就差不多是源代码了，不过都是一些修改向的脚本，本仓库不会存储二进制&闭源代码，也不会集成闭源代码到 CatWrt 中!
 
-实现编译半自动化，版本管理，文件统一；脚本需要 root 运行，编译只能普通用户；资源文件和 LEDE 源码需要存储在 `/home` 才能正常食用。
+项目助力 CatWrt 开源计划，实现编译半自动化，版本管理，文件统一。
+
+脚本需要赋予 sudo 运行，编译只能普通用户！资源文件和 LEDE 源码需要存储在 `/home` 才能正常食用！
 
 [![Stars](https://m3-markdown-badges.vercel.app/stars/3/3/miaoermua/catwrt_base)](https://github.com/miaoermua/catwrt_base)
 [![Issues](https://m3-markdown-badges.vercel.app/issues/1/2/miaoermua/catwrt_base)](https://github.com/miaoermua/catwrt_base/issues)
