@@ -20,9 +20,11 @@ CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改
 sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | sudo bash
 ```
 
-## init
+## init 本项目
 
-以下内容需要 clone 本仓库，并且赋予权限，此操作仅限 root 用户
+以下内容在 LEDE 第一次编译成功后再释放避免修改失败导致第一次编译失败。
+
+需要 clone 本仓库，并且赋予权限，此操作仅限 root 用户
 
 ```
 sudo git clone https://github.com/miaoermua/catwrt_base.git
