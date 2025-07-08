@@ -1,6 +1,6 @@
 # catwrt_base
 
-> 请不要继续 fork，近日开发工作讲优化结构。
+> 请不要 Fork，可能某一天开发工作将优化结构。
 
 CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改的发行版基础资源仓库，将二次编辑好的内容上传到本仓库再通过自动化脚本安装到对应位置实现预装到系统中。
 
@@ -20,9 +20,24 @@ CatWrt_Base 是基于 [Lean's LEDE](https://github.com/coolsnowwolf/lede) 修改
 sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh | sudo bash
 ```
 
+## init
+
+以下内容需要 clone 本仓库，并且赋予权限，此操作仅限 root 用户
+
+```
+sudo git clone https://github.com/miaoermua/catwrt_base.git
+cd catwrt_base
+sudo chmod +x pull.sh && sudo chmod +x main.sh
+```
+
+**更新插件**
+```bash
+sudo bash /home/catwrt_base/pull.sh
+```
+
 **刷版本号** （更新 CatWrt 关键文件）
 ```bash
-sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/mian.sh | sudo bash
+sudo bash /home/catwrt_base/main.sh
 ```
 
 版本描述：
@@ -54,14 +69,17 @@ swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
 
 更新 LEDE 源码和执行 feeds 脚本更新源码仓库的插件
 
-> 请不要给 LEDE 使用任何 sudo 或 root 用户污染源码权限。
+> ⚠️ 请不要给 LEDE 使用任何 sudo 或 root 用户污染源码权限。
+> 需要准备一个普通用户来编译，例如我这里使用的是 `miaoer`
 >
 > ```bash
 > sudo chown -R miaoer:miaoer /home/miaoer/lede
 > ```
 
+除了 dl 库的下载线程以下代码建议不要更改
+
 ```bash
-cd ~/lede
+cd /home/lede
 git pull
 ./scripts/feeds update -a
 ./scripts/feeds install -a
@@ -91,7 +109,14 @@ make V=s -j$(nproc)
 
 ---
 
-CatWrt base 和 LEDE 库冲突，保留 LEDE 源码更新放弃 CatWrt 修改，重新执行 main.sh 释放文件。
+CatWrt base 和 LEDE 库冲突，保留 LEDE 源码更新放弃 CatWrt 修改；
+
+```bash
+git fetch origin
+git reset --hard origin
+```
+
+以下是输出内容，接下来你可以，重新执行 main.sh 释放文件。
 
 ```logs
 hint: You have divergent branches and need to specify how to reconcile them.
@@ -121,7 +146,7 @@ miaoer@BuildCatWrt:/home/lede$ git pull
 Already up to date.
 ```
 
-遇到 naive 编译错误，安装一下额外依赖
+如遇到 naive 编译错误，安装一下额外依赖
 
 ```bash
 sudo apt install clang generate-ninja
