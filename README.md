@@ -70,7 +70,8 @@ swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
 更新 LEDE 源码和执行 feeds 脚本更新源码仓库的插件
 
 > ⚠️ 请不要给 LEDE 使用任何 sudo 或 root 用户污染源码权限。
-> 需要准备一个普通用户来编译，例如我这里使用的是 `miaoer`
+> 
+> 需要准备一个普通用户来编译，例如我这里使用的是 `miaoer` 操作整个 lede 源码库，并不是创建普通用户的命令。
 >
 > ```bash
 > sudo chown -R miaoer:miaoer /home/miaoer/lede
