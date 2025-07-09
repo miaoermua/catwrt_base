@@ -7,6 +7,7 @@ display_menu() {
 }
 
 update_template() {
+    set -x
     read -p "输入架构和版本 (例如 mt7621/v24.9 或 diy/theme-whu): " arch_version
     arch=$(echo $arch_version | cut -d'/' -f1)
     version=$(echo $arch_version | cut -d'/' -f2)
@@ -43,6 +44,7 @@ update_template() {
     else
         echo "无效的架构或版本"
     fi
+    set +x
 }
 
 delete_template() {
