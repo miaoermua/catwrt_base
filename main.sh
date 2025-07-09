@@ -7,11 +7,11 @@ display_menu() {
 }
 
 update_template() {
-    set -x
     read -p "输入架构和版本 (例如 mt7621/v24.9 或 diy/theme-whu): " arch_version
     arch=$(echo $arch_version | cut -d'/' -f1)
     version=$(echo $arch_version | cut -d'/' -f2)
-
+    
+    set -x
     # Update files based on the architecture and version
     if [[ -d "/home/catwrt_base/$arch/$version" ]]; then
         cp /home/catwrt_base/$arch/$version/base-files/files/bin/config_generate /home/lede/package/base-files/files/bin/
