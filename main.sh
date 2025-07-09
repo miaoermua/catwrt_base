@@ -36,7 +36,7 @@ update_template() {
 
         # Add cattools to every architecture
         mkdir -p /home/lede/package/base-files/files/usr/bin
-        curl -fsSL https://service.miaoer.xyz/cattools/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
+        curl -fsSL https://raw.miaoer.net/cattools/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
         chmod +x /home/lede/package/base-files/files/usr/bin/cattools
 
         echo "模板更新完成"
