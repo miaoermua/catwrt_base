@@ -39,12 +39,13 @@ update_template() {
         mkdir -p /home/lede/package/base-files/files/usr/bin
         curl -fsSL https://raw.miaoer.net/cattools/cattools.sh -o /home/lede/package/base-files/files/usr/bin/cattools
         chmod +x /home/lede/package/base-files/files/usr/bin/cattools
-
+    set +x
+    
         echo "模板更新完成"
     else
         echo "无效的架构或版本"
     fi
-    set +x
+
 }
 
 delete_template() {
