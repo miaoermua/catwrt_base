@@ -51,7 +51,6 @@ REPOS=(
     "https://github.com/EOYOHOO/rkp-ipid"
     "https://github.com/EasyTier/luci-app-easytier"
     "https://github.com/MikeWang000000/FakeHTTP"
-    "https://github.com/max0y/luci-app-cd8021x"
 )
 
 # Openclash
