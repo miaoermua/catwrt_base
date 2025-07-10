@@ -17,6 +17,7 @@ if [ ! -d "/home/lede" ]; then
 fi
 
 REPOS=(
+    "https://github.com/miaoermua/openwrt-homebox"
     "https://github.com/destan19/OpenAppFilter"
     "https://github.com/fw876/helloworld"
     "https://github.com/xiaorouji/openwrt-passwall"
@@ -37,7 +38,6 @@ REPOS=(
     "https://github.com/sirpdboy/luci-app-ddns-go"
     "https://github.com/kuoruan/openwrt-v2ray"
     "https://github.com/Erope/openwrt_nezha"
-    "https://github.com/selfcan/luci-app-homebox"  ## LUCI NOT WORK!
     "https://github.com/sbwml/luci-app-alist"      ## will use v3.40.0 tag
     "https://github.com/ilxp/luci-app-ikoolproxy"
     "https://github.com/jimlee2002/openwrt-minieap-gdufs"
