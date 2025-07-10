@@ -1,0 +1,114 @@
+::  LEDE
+License=GPL 2.0
+git=https://github.com/coolsnowwolf/lede
+
+::  OAF
+License=GPL 3.0
+git=https://github.com/destan19/OpenAppFilter
+
+::  helloworld
+License=GPL 2.0
+git=https://github.com/fw876/helloworld
+
+::  pw1
+License=Unknown
+git=https://github.com/xiaorouji/openwrt-passwall
+
+::  pw2
+License=Unknown
+git=https://github.com/xiaorouji/openwrt-passwall2
+
+::  pw-packages
+License=Unknown
+git=https://github.com/xiaorouji/openwrt-passwall-packages
+
+::  luci-theme-design
+License=GPL 2.0
+git=https://github.com/0x676e67/luci-theme-design
+
+::  luci-app-adguardhome
+License=Unknown
+git=https://github.com/rufengsuixing/luci-app-adguardhome
+
+::  istore
+License=MIT
+git=https://github.com/linkease/istore
+
+:: UA2F
+License=GPL 3.0
+git=https://github.com/Zxilly/UA2F
+
+:: luci-app-usb3disable
+License=Unknown
+git=https://github.com/rufengsuixing/luci-app-usb3disable
+
+:: LingTiGameAcc
+https://github.com/esirplayground/LingTiGameAcc
+
+:: luci-app-LingTiGameAcc
+License=GPL 2.0
+https://github.com/esirplayground/luci-app-LingTiGameAcc
+
+:: luci-app-poweroff
+License=GPL 3.0
+https://github.com/esirplayground/luci-app-poweroff
+
+:: openwrt-netbird
+License=BSD 3
+https://github.com/messense/openwrt-netbird
+
+:: luci-app-eqosplus
+License=Unknown
+https://github.com/sirpdboy/luci-app-eqosplus
+
+:: luci-app-taskplan
+License=MIT
+https://github.com/sirpdboy/luci-app-taskplan
+
+:: luci-app-lucky
+License=Unknown
+https://github.com/sirpdboy/luci-app-lucky
+
+:: luci-app-ddns-go
+License=GPL 2.0
+https://github.com/sirpdboy/luci-app-ddns-go
+
+:: openwrt-v2ray
+License=MIT
+https://github.com/kuoruan/openwrt-v2ray
+
+:: openwrt_nezha
+License=GPL 3.0
+https://github.com/Erope/openwrt_nezha
+
+:: luci-app-homebox
+License=MIT
+https://github.com/selfcan/luci-app-homebox
+
+:: luci-app-alist
+License=Unknown
+https://github.com/sbwml/luci-app-alist
+
+:: luci-app-ikoolproxy
+License=Unknown
+https://github.com/ilxp/luci-app-ikoolproxy
+
+:: openwrt-minieap-gdufs
+License=GPL 3.0
+https://github.com/jimlee2002/openwrt-minieap-gdufs
+
+:: luci-proto-minieap
+License=GPL 3.0
+https://github.com/jimlee2048/luci-proto-minieap
+
+:: luci-app-mentohust
+License=Unknown
+https://github.com/BoringCat/luci-app-mentohust
+
+:: luci-app-minieap
+License=Unknown
+https://github.com/BoringCat/luci-app-minieap
+
+:: luci-theme-asus
+License=GPL 2.0
+https://github.com/FUjr/luci-theme-asus
