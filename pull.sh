@@ -25,7 +25,7 @@ REPOS=(
     "https://github.com/rufengsuixing/luci-app-adguardhome"
     "https://github.com/linkease/istore"
     "https://github.com/0x676e67/luci-theme-design"
-    "https://github.com/Zxilly/UA2F"
+    "https://github.com/Zxilly/UA2F"               ## will use v4.5.0 tag
     "https://github.com/rufengsuixing/luci-app-usb3disable"
     "https://github.com/esirplayground/luci-app-LingTiGameAcc"
     "https://github.com/esirplayground/LingTiGameAcc"
@@ -38,7 +38,7 @@ REPOS=(
     "https://github.com/kuoruan/openwrt-v2ray"
     "https://github.com/Erope/openwrt_nezha"
     "https://github.com/selfcan/luci-app-homebox"  ## LUCI NOT WORK!
-    "https://github.com/sbwml/luci-app-alist"
+    "https://github.com/sbwml/luci-app-alist"      ## will use v3.40.0 tag
     "https://github.com/ilxp/luci-app-ikoolproxy"
     "https://github.com/jimlee2002/openwrt-minieap-gdufs"
     "https://github.com/jimlee2048/luci-proto-minieap"
@@ -67,15 +67,38 @@ update_or_clone_repo() {
     repo_name=$(basename -s .git "$repo_url")
     repo_dir="$TARGET_DIR/$repo_name"
 
-    ## echo -e "${GREEN}Processing $repo_name${NC}"
-
     if [ ! -d "$repo_dir" ]; then
         echo -e "${GREEN}Cloning $repo_name${NC}"
-        git clone "$repo_url" "$repo_dir"
+
+        case "$repo_name" in
+            UA2F)
+                git clone -b v4.5.0 "$repo_url" "$repo_dir"
+                ;;
+            luci-app-alist)
+                git clone -b v3.40.0 "$repo_url" "$repo_dir"
+                ;;
+            *)
+                git clone "$repo_url" "$repo_dir"
+                ;;
+        esac
     else
         echo -e "${GREEN}Updating $repo_name${NC}"
         cd "$repo_dir" || exit
-        git pull
+
+        case "$repo_name" in
+            UA2F)
+                git fetch --tags
+                git checkout v4.5.0
+                ;;
+            luci-app-alist)
+                git fetch --tags
+                git checkout v3.40.0
+                ;;
+            *)
+                git pull
+                ;;
+        esac
+
         cd - || exit
     fi
 }
