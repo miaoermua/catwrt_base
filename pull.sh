@@ -139,6 +139,40 @@ update_wyc_plugins() {
     done
 }
 
+update_bitsrunlogin_go() {
+    echo -e "${GREEN}Processing immortalwrt luci & packages for bitsrunlogin-go${NC}"
+
+    TEMP_DIR="/tmp/immortalwrt_bitsrunlogin"
+
+    if [ -d "$TEMP_DIR" ]; then
+        rm -rf "$TEMP_DIR"
+    fi
+
+    echo -e "${GREEN}Cloning immortalwrt/luci into $TEMP_DIR/luci${NC}"
+    git clone --depth=1 https://github.com/immortalwrt/luci.git  "$TEMP_DIR/luci"
+
+    echo -e "${GREEN}Cloning immortalwrt/packages into $TEMP_DIR/packages${NC}"
+    git clone --depth=1 https://github.com/immortalwrt/packages.git  "$TEMP_DIR/packages"
+
+    LUCI_SRC="$TEMP_DIR/luci/applications/luci-app-bitsrunlogin-go"
+    LUCI_DST="$TARGET_DIR/luci-app-bitsrunlogin-go"
+    if [ -d "$LUCI_DST" ]; then
+        echo -e "${GREEN}Removing old luci-app-bitsrunlogin-go${NC}"
+        rm -rf "$LUCI_DST"
+    fi
+    cp -r "$LUCI_SRC" "$LUCI_DST"
+
+    PKG_SRC="$TEMP_DIR/packages/net/bitsrunlogin-go"
+    PKG_DST="$TARGET_DIR/bitsrunlogin-go"
+    if [ -d "$PKG_DST" ]; then
+        echo -e "${GREEN}Removing old bitsrunlogin-go${NC}"
+        rm -rf "$PKG_DST"
+    fi
+    cp -r "$PKG_SRC" "$PKG_DST"
+
+    rm -rf "$TEMP_DIR"
+}
+
 update_luci_theme_argon() {
     repo_url="https://github.com/jerrykuku/luci-theme-argon"
     repo_name=$(basename -s .git "$repo_url")
@@ -172,6 +206,7 @@ done
 
 update_openclash
 update_wyc_plugins
+update_bitsrunlogin_go
 update_luci_theme_argon
 
 echo -e "${GREEN}All repositories are up to date.${NC}"
