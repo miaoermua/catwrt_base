@@ -47,6 +47,10 @@ REPOS=(
     "https://github.com/BoringCat/luci-app-minieap"
     "https://github.com/FUjr/luci-theme-asus"
     "https://github.com/SunBK201/UA3F"
+    "https://github.com/yuhanjin/feed-netkeeper"
+    "https://github.com/EOYOHOO/rkp-ipid"
+    "https://github.com/EasyTier/luci-app-easytier"
+    "https://github.com/MikeWang000000/FakeHTTP"
 )
 
 # Openclash
