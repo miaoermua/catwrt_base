@@ -29,7 +29,7 @@ sudo curl https://raw.githubusercontent.com/miaoermua/catwrt_base/main/pull.sh |
 ```
 sudo git clone https://github.com/miaoermua/catwrt_base.git
 cd catwrt_base
-sudo chmod +x pull.sh && sudo chmod +x main.sh
+sudo chmod +x main.sh pull.sh
 ```
 
 **更新插件**
