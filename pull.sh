@@ -19,6 +19,7 @@ fi
 REPOS=(
     "https://github.com/miaoermua/cattools"
     "https://github.com/miaoermua/openwrt-homebox"
+    "https://github.com/miaoermua/luci-app-poweroff"
     "https://github.com/destan19/OpenAppFilter"
     "https://github.com/fw876/helloworld"
     "https://github.com/xiaorouji/openwrt-passwall"
@@ -31,7 +32,6 @@ REPOS=(
     "https://github.com/rufengsuixing/luci-app-usb3disable"
     "https://github.com/esirplayground/luci-app-LingTiGameAcc"
     "https://github.com/esirplayground/LingTiGameAcc"
-    "https://github.com/esirplayground/luci-app-poweroff"
     "https://github.com/messense/openwrt-netbird"
     "https://github.com/sirpdboy/luci-app-eqosplus"
     "https://github.com/sirpdboy/luci-app-autotimeset"
