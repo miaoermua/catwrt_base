@@ -185,6 +185,7 @@ update_bitsrunlogin_go() {
 }
 
 update_luci_theme_argon() {
+    set -x
     repo_url="https://github.com/jerrykuku/luci-theme-argon"
     repo_name=$(basename -s .git "$repo_url")
     repo_dir="$TARGET_DIR/$repo_name"
@@ -209,8 +210,15 @@ update_luci_theme_argon() {
     else
         echo -e "${GREEN}Background image already exists, skipping download${NC}"
     fi
+    set +x
 }
 
+rm_lean_ddnsgo(){
+    set -x
+    rm -rf /home/lede/feeds/packages/net/ddns-go
+    rm -rf /home/lede/feeds/luci/applications/luci-app-ddns-go
+    set +x
+}
 for repo in "${REPOS[@]}"; do
     update_or_clone_repo "$repo"
 done
@@ -219,5 +227,6 @@ update_openclash
 update_wyc_plugins
 update_bitsrunlogin_go
 update_luci_theme_argon
+rm_lean_ddnsgo
 
 echo -e "${GREEN}All repositories are up to date.${NC}"
