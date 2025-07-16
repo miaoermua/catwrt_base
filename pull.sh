@@ -191,7 +191,7 @@ update_luci_theme_argon() {
         echo -e "${GREEN}Updating $repo_name${NC}"
         cd "$repo_dir" || exit
         git pull origin 18.06
-        rm -rf ../feeds/luci/theme/luci-theme-argon
+        rm -rf /home/lede/feeds/luci/theme/luci-theme-argon
         cd - || exit
     fi
 
