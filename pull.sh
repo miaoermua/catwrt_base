@@ -36,7 +36,7 @@ REPOS=(
     "https://github.com/sirpdboy/luci-app-eqosplus"
     "https://github.com/sirpdboy/luci-app-autotimeset"
     "https://github.com/sirpdboy/luci-app-lucky"
-    "https://github.com/sirpdboy/luci-app-ddns-go"
+    "https://github.com/sirpdboy/luci-app-ddns-go" ## will use 6.9.1 tag
     "https://github.com/Erope/openwrt_nezha"
     "https://github.com/sbwml/luci-app-alist"      ## will use v3.40.0 tag
     "https://github.com/ilxp/luci-app-ikoolproxy"
