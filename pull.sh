@@ -50,7 +50,7 @@ REPOS=(
     "https://github.com/yuhanjin/feed-netkeeper"
     "https://github.com/EOYOHOO/rkp-ipid"
     "https://github.com/EasyTier/luci-app-easytier"
-    "https://github.com/MikeWang000000/FakeHTTP"
+    "https://github.com/sirpdboy/luci-app-partexp"
 )
 
 # Openclash
