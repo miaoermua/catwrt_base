@@ -17,6 +17,7 @@ if [ ! -d "/home/lede" ]; then
 fi
 
 REPOS=(
+    "https://github.com/miaoermua/cattools"
     "https://github.com/miaoermua/openwrt-homebox"
     "https://github.com/destan19/OpenAppFilter"
     "https://github.com/fw876/helloworld"
