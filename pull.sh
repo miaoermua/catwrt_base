@@ -81,6 +81,9 @@ update_or_clone_repo() {
             luci-app-alist)
                 git clone -b v3.40.0 "$repo_url" "$repo_dir"
                 ;;
+            luci-app-ddns-go)
+                git clone -b lua "$repo_url" "$repo_dir"
+                ;;
             *)
                 git clone "$repo_url" "$repo_dir"
                 ;;
@@ -97,6 +100,10 @@ update_or_clone_repo() {
             luci-app-alist)
                 git fetch --tags
                 git checkout v3.40.0
+                ;;
+            luci-app-ddns-go)
+                git fetch origin lua
+                git checkout lua
                 ;;
             *)
                 git pull
