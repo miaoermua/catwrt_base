@@ -77,7 +77,7 @@ swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
 >
 > ```bash
 > sudo usermod -aG sudo miaoer
-> sudo chown -R miaoer:miaoer /home/miaoer/lede
+> sudo chown -R miaoer:miaoer /home/lede
 > ```
 
 除了 dl 库的下载线程以下代码建议不要更改
