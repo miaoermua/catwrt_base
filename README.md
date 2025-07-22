@@ -76,6 +76,7 @@ swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
 > 需要准备一个普通用户来编译，例如我这里使用的是 `miaoer` 操作整个 lede 源码库，并不是创建普通用户的命令。
 >
 > ```bash
+> sudo usermod -aG sudo miaoer
 > sudo chown -R miaoer:miaoer /home/miaoer/lede
 > ```
 
